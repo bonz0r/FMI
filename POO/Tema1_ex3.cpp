@@ -167,6 +167,19 @@ public:
         }
     }
 
+    //Remove a certain "propietar" from the array
+    void operator -=(Proprietar& _proprietar){
+        for(int i = 0; i < nrProprietari; ++i){
+            if(Prop[i] == _proprietar){
+                for (int j = i; j < nrProprietari - 1; ++j)
+                {
+                    Prop[j] = Prop[j+1]
+                }
+            }
+            break;
+        }
+    }
+
     Casa& operator = (Casa& casa)
     {
         strcpy(oras, casa.oras);
