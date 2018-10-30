@@ -87,6 +87,7 @@ public:
     ~Medicament(){};
     Medicament(const char _denumire[], float _pret, int _zi, const char _luna[], int _an);
     Medicament(const char _denumire[], Data _fabricat);
+    Medicament(const char _denumire[], float _pret , Data _fabricat);
 
     friend ostream& operator << (ostream& out, Medicament& medicament)
     {
@@ -141,6 +142,14 @@ Medicament::Medicament(const char _denumire[], Data _fabricat)
     denumire = new char[strlen(_denumire)];
     strcpy(denumire, _denumire);
     pret = 0;
+    fabricat = _fabricat;
+}
+
+Medicament::Medicament(const char _denumire[], float _pret ,Data _fabricat)
+{
+    denumire = new char[strlen(_denumire)];
+    strcpy(denumire, _denumire);
+    pret = _pret;
     fabricat = _fabricat;
 }
 
@@ -227,19 +236,26 @@ Farmacie::Farmacie(const char *_denumire)
 int main()
 {
     Data d(1,"ianuarie",2018);
-   // cout << d;
-    Medicament m1("Parasinus",9.5, 10, "ianuarie", 2030), m2("Aspirina", d), m3;
-    cout << m1 << "\n" << m2 << "\n";
-    cin>>m3;
-    cout<<m1 <<m3;
-    if (m1<m3) cout<<"m1 este fabricat inaintea m3";
-    else cout<<"m3 este fabricat inaintea m1";
-    Farmacie f1("Farmac");
-    f1 += m1; //adaugare medicament m1 in lista de medicamente a farmaciei
-    f1 = m2 + f1; //adaugare medicament m2 in lista de medicamente a farmaciei
-    cout << f1;
-     Farmacie f2 = f1;
-   cout<<f2; //afisarea tuturor medicamentelor
-    return 0;
-    
+    string primavara[] = {"ianuarie", "februarie", "martie"}
+    Data ian[31];
+    for (int j = 0; j < 3; ++j)
+    {
+        for (int i = 0; i < 31; ++i)
+        {
+            ian[i] = new Data(i,primavara[j],2018);
+        }
+        Medicament m1("Parasinus",9.5, ian[23]), m2("Aspirina", ian[11]), m3;
+        cout << m1 << "\n" << m2 << "\n";
+        cin>>m3;
+        cout<<m1 <<m3;
+        if (m1<m3) cout<<"m1 este fabricat inaintea m3";
+        else cout<<"m3 este fabricat inaintea m1";
+        Farmacie f1("Farmac");
+        f1 += m1; //adaugare medicament m1 in lista de medicamente a farmaciei
+        f1 = m2 + f1; //adaugare medicament m2 in lista de medicamente a farmaciei
+        cout << f1;
+        Farmacie f2 = f1;
+        cout<<f2; //afisarea tuturor medicamentelor
+    }    
+    return 0;   
 }
