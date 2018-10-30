@@ -185,7 +185,7 @@ class Banca
     char denumire[50];
     int nrAngajati;
     Angajat* Ang;
-
+    string descriere;
 public:
     Banca()
     {
@@ -193,9 +193,13 @@ public:
         nrAngajati=0;
     };
     ~Banca(){delete Ang;};
-    Banca(const char _denumire[], int _nrAngajati);
-    Banca(const char _denumire[], int _nrAngajati, Angajat _ang[]);
+    Banca(const char _denumire[], int _nrAngajati, string _descriere);
+    Banca(const char _denumire[], int _nrAngajati, Angajat _ang[], string _descriere);
     Banca(Banca& banca);
+
+    string getDescriere(){return descriere;}
+    int getNrAngajati(){return nrAngajati;}
+    Angajat* getAngajati(){return Ang;}
 
     Banca& operator = (const Banca& banca)
     {
@@ -262,13 +266,14 @@ Banca::Banca(Banca &banca)
     strcpy(denumire, banca.denumire);
     nrAngajati = banca.nrAngajati;
     Ang = new Angajat[banca.nrAngajati];
-    if ((banca.nrAngajati > 0)&&(banca.Ang!=NULL))
+    if ( ( banca.nrAngajati > 0 )&&( banca.Ang != NULL ))
         for (int i=0; i < banca.nrAngajati; i++)
             Ang[i] = banca.Ang[i];
 }
 
-int main()
-{
+Banca::Banc
+
+void rezolvareProblema(){
     Caracteristica c1("Director",10), c2("Casier"), c3 = c1;
     c3 = 12 + c3; // actualizeaza vechimea adaugand 12 ani
     cout << c3;
@@ -285,5 +290,10 @@ int main()
     Banca b2(b3);
     b2.modificare(50,-5); // scade vechimea celui de-al doilea angajat cu 5 ani
     cout<<b2;
+}
+
+int main()
+{
+    rezolvareProblema();
     return 0;
 }
