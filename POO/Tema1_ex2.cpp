@@ -9,6 +9,7 @@ class Ingredient
     char* nume;
     float pret;
     int cantitate;
+    float profitabilitate;
 public:
     Ingredient();
     ~Ingredient();
@@ -19,15 +20,18 @@ public:
     {
         out << ingredient.nume << ", ";
         out << ingredient.pret << ", ";
-        out << ingredient.cantitate << "\n";
+        out << ingredient.cantitate << ", ";
+        out << ingredient.profitabilitate << "\n"; 
         return out;
     }
 
+    // Vrem sa putem citi direct ingredientele pentru simplitate
     friend istream& operator >> (istream& in, Ingredient& ingredient)
     {
         char _nume[250];
         float _pret;
         int _cantitate;
+        float _profitabilitate;
         cout << "Nume ingredient:";
         in.getline(_nume, 250);
         ingredient.nume = new char[strlen(_nume)];
@@ -38,7 +42,8 @@ public:
         cout << "\nCantitate:";
         in >> _cantitate;
         ingredient.cantitate = _cantitate;
-
+        in >> _profitabilitate;
+        ingredient.profitabilitate = _profitabilitate;
         return in;
     }
 
