@@ -89,21 +89,25 @@ void Caracteristica::setVechime(int vechime)
 
 class Angajat
 {
-    int id;
+    // Vor avea id-uri diferite in ordine secventiala
+    static int id;
 public:
     int getId();
 
 private:
     char nume[50];
     Caracteristica car;
+    void countUpId(){
+        Angajat::id++;
+    }
+
 public:
     Caracteristica &getCar();
 
-public:
     Angajat()
     {
-        id=-1;
         strcpy(nume, "nedefinit");
+        countUpId()
     };
     ~Angajat(){};
     Angajat(int _id, const char _nume[], Caracteristica _car);
@@ -141,26 +145,28 @@ public:
 
 };
 
-Angajat::Angajat(int _id, const char *_nume, Caracteristica _car)
+int Angajat::id = 0;
+
+Angajat::Angajat(const char *_nume, Caracteristica _car)
 {
-    id = _id;
     strcpy(nume, _nume);
     car = _car;
+    countUpId()
 }
 
-Angajat::Angajat(int _id, const char *_nume, const char _functie[], int _vechime)
+Angajat::Angajat(const char *_nume, const char _functie[], int _vechime)
 {
-    id = _id;
     strcpy(nume, _nume);
     Caracteristica _car(_functie, _vechime);
     car = _car;
+    countUpId()
 }
 
 Angajat::Angajat(Angajat &angajat)
 {
-    id = angajat.id;
     strcpy(nume, angajat.nume);
     car = angajat.car;
+    countUpId()
 }
 
 int Angajat::getId()
@@ -186,7 +192,7 @@ public:
         strcpy(denumire, "nedefinit");
         nrAngajati=0;
     };
-    ~Banca(){};
+    ~Banca(){delete Ang;};
     Banca(const char _denumire[], int _nrAngajati);
     Banca(const char _denumire[], int _nrAngajati, Angajat _ang[]);
     Banca(Banca& banca);

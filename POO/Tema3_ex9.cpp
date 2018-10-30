@@ -26,7 +26,7 @@ public:
     };
     ~Ingredient()
     {
-        //delete denumire;
+        delete denumire;
     };
     Ingredient(const char* _denumire, int _cantitate, float _pret_unitar)
     {
@@ -34,6 +34,7 @@ public:
         strcpy(denumire, _denumire);
         cantitate = _cantitate;
         pret_unitar = _pret_unitar;
+        cout << "Constructor pentru ingredient";
     }
 
     Ingredient (const Ingredient& ingredient)
@@ -42,6 +43,7 @@ public:
         strcpy(denumire, ingredient.denumire);
         cantitate =  ingredient.cantitate;
         pret_unitar = ingredient.pret_unitar;
+        cout << "Constructor de copiere pentru ingredient";
     }
 
     Ingredient& operator = (const Ingredient& ingredient);
@@ -72,6 +74,7 @@ ostream &operator << (ostream &out, Ingredient &ingredient)
     out << "\n\tDenumire ingredient: " << ingredient.denumire;
     out << "\n\tCantitate ingredient: " << ingredient.cantitate;
     out << "\n\tPret unitar ingredient: " << ingredient.pret_unitar;
+    out << "\n\tPret total: " << ingredient.pret_unitar * ingredient.cantitate;
     return out;
 }
 
@@ -127,8 +130,7 @@ public:
         manopera = 0;
     }
 
-    ~Pizza()
-    {};
+    ~Pizza(){delete ingrediente;}
 
     Pizza(Ingredient* _ingrediente, int _nrIngrediente, const char* _denPizza, float _manopera)
     {
@@ -339,7 +341,7 @@ public:
     {
         pizze = nullptr;
     }
-    ~Meniu(){};
+    ~Meniu(){delete pizze};
 
     Meniu& operator = (Meniu& menu)
     {
